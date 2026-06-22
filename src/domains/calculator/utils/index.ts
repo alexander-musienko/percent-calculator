@@ -1,5 +1,3 @@
-import { IBaseFields, IDifferenceInPercentage } from "../pages/percent-calc";
-
 type TValues = {
   a: string | undefined;
   b: string | undefined;

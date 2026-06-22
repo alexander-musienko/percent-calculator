@@ -1,10 +1,8 @@
-import { Input, Select, SelectItem } from "@nextui-org/react";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Select, SelectItem } from "@nextui-org/react";
+import { ChangeEvent, useState } from "react";
 import {
   calculateDifferenceInPercentage,
   calculatePercentOfANumber,
-  calculatePercentPlusNumber,
   subtractPercentFromNumber,
 } from "../../utils";
 import { CardLayout } from "./ui/CardInstance";
@@ -22,14 +20,6 @@ export interface INumberOfNumberPercent extends IBaseFields {
 export interface IDifferenceInPercentage extends IBaseFields {
   secondFullNumber?: string;
 }
-
-type TFormData = {
-  percentOfNumber: IBaseFields;
-  percentPlusNumber: IBaseFields;
-  // numberOfNumberPercent: INumberOfNumberPercent;
-  percentMinusNumber: IBaseFields;
-  differenceInPercentage: IDifferenceInPercentage;
-};
 
 const decimalItems = Array.from({ length: 5 }, (_, index) => ({
   label: String(index),
