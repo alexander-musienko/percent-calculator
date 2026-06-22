@@ -1,48 +1,68 @@
-import { Card, CardBody, CardHeader } from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, input } from "@nextui-org/react";
 import { FC } from "react";
-import { copyToClipboard } from "../../../../../../shared/utils/clipboard";
-import { toast } from "react-toastify";
-import { Copy } from "../../../../../../assets/icons/Copy";
-import { Count } from "../../../../../../shared/components/Count";
-import { giveMeSomeMotivation } from "../../../../../../shared/utils/auido-motivation";
+import { amountOfInputsAtom, type TAmountOfInputsState } from "../../store";
+import { useAtom } from "jotai";
+import type { EInputType } from "../../types";
+import { LS_KEYS } from "../../constants/local-storage";
 
 type TCardInstanceProps = {
   headerText: string;
-  result: string | number;
+  inputKey?: EInputType;
   children: React.ReactNode;
-  unit?: string;
 };
 
-const copyOnClick = (e: React.MouseEvent<HTMLParagraphElement>) => {
-  const text = e.currentTarget.innerText;
-  toast("Успешно скопировано", { icon: Copy });
-  copyToClipboard(text);
-  window.dumbMode ? giveMeSomeMotivation() : null;
+const syncWithLS = (state: TAmountOfInputsState) => {
+  localStorage.setItem(LS_KEYS.INPUTS_AMOUNT, JSON.stringify(state));
 };
 
-export const CardInstance: FC<TCardInstanceProps> = ({
-  headerText,
-  result,
-  unit,
-  children,
-}) => {
+export const CardLayout: FC<TCardInstanceProps> = ({ headerText, children, inputKey }) => {
+  const [_, setAmountOfInputs] = useAtom(amountOfInputsAtom);
+
+  const addInput = () => {
+    if (inputKey) {
+      setAmountOfInputs((prev) => {
+        const newState = { ...prev, [inputKey]: +prev[inputKey] + 1 };
+        syncWithLS(newState);
+        return newState;
+      });
+    }
+  };
+
+  const removeInput = () => {
+    if (inputKey) {
+      setAmountOfInputs((prev) => {
+        const newState = { ...prev, [inputKey]: +prev[inputKey] - 1 };
+
+        if (newState[inputKey] > 0) {
+          syncWithLS(newState);
+          return newState;
+        }
+
+        return prev;
+      });
+    }
+  };
+
   return (
     <Card>
-      <CardHeader className="flex">
+      <CardHeader className="flex justify-between">
         <h1 className="text-xl font-bold">{headerText}</h1>
+        <div className="flex justify-center items-center gap-2">
+          <Button
+            onClick={addInput}
+            className="w-[32px] h-[32px] font-bold min-w-0 p-0 m-0 flex-grow-0"
+          >
+            +
+          </Button>
+          <Button
+            onClick={removeInput}
+            className="w-[32px] h-[32px] font-bold min-w-0 p-0 m-0 flex-grow-0"
+          >
+            -
+          </Button>
+        </div>
       </CardHeader>
-      <CardBody className="flex gap-4 flex-row items-center">
-        <div className="flex flex-col gap-2 items-center sm:flex-row sm:gap-4">
-          {children}
-        </div>
-        <div className="flex gap-2 flex-row items-center flex-grow justify-between">
-          <p>=</p>
-          <p onClick={copyOnClick} className="text-xl font-bold cursor-pointer">
-            <Count end={result} />
-            {unit}
-          </p>
-        </div>
-      </CardBody>
+      <CardBody className="flex gap-4 flex-column justify-start items-stretch">{children}</CardBody>
     </Card>
   );
 };

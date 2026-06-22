@@ -1,11 +1,11 @@
-import { IBaseFields, IDifferenceInPercentage } from "../pages/percent-calc";
+type TValues = {
+  a: string | undefined;
+  b: string | undefined;
+};
 
-export const calculatePercentOfANumber = (
-  values: IBaseFields,
-  toFixedNum?: number
-) => {
-  if (values?.fullNumber && values?.percent) {
-    const [fullNumber, percent] = [+values.fullNumber, +values.percent];
+export const calculatePercentOfANumber = (values: TValues, toFixedNum?: number) => {
+  if (values?.b && values?.a) {
+    const [fullNumber, percent] = [+values.b, +values.a];
     const percentOfNumberResult = (fullNumber * percent) / 100;
     return +percentOfNumberResult.toFixed(toFixedNum || 0);
   } else {
@@ -13,12 +13,9 @@ export const calculatePercentOfANumber = (
   }
 };
 
-export const calculatePercentPlusNumber = (
-  values: IBaseFields,
-  toFixedNum?: number
-) => {
-  if (values?.percent && values?.fullNumber) {
-    const [fullNumber, percent] = [+values.fullNumber, +values.percent];
+export const calculatePercentPlusNumber = (values: TValues, toFixedNum?: number) => {
+  if (values?.a && values?.b) {
+    const [fullNumber, percent] = [+values.b, +values.a];
     const onePercentNumber = fullNumber / 100;
     const numberOfPercent = onePercentNumber * percent;
     const percentPlusNumberResult = numberOfPercent + fullNumber;
@@ -28,12 +25,9 @@ export const calculatePercentPlusNumber = (
   }
 };
 
-export const subtractPercentFromNumber = (
-  values: IBaseFields,
-  toFixedNum?: number
-) => {
-  if (values?.percent && values?.fullNumber) {
-    const [fullNumber, percent] = [+values.fullNumber, +values.percent];
+export const subtractPercentFromNumber = (values: TValues, toFixedNum?: number) => {
+  if (values?.a && values?.b) {
+    const [fullNumber, percent] = [+values.b, +values.a];
     const onePercentNumber = fullNumber / 100;
     const numberOfPercent = onePercentNumber * percent;
     const subtractedNumberResult = fullNumber - numberOfPercent;
@@ -43,15 +37,9 @@ export const subtractPercentFromNumber = (
   }
 };
 
-export const calculateDifferenceInPercentage = (
-  values: IDifferenceInPercentage,
-  toFixedNum?: number
-) => {
-  if (values?.fullNumber && values.secondFullNumber) {
-    const [fullNumber, secondFullNumber] = [
-      +values.fullNumber,
-      +values.secondFullNumber,
-    ];
+export const calculateDifferenceInPercentage = (values: TValues, toFixedNum?: number) => {
+  if (values?.a && values.b) {
+    const [fullNumber, secondFullNumber] = [+values.a, +values.b];
     const max = Math.max(fullNumber, secondFullNumber);
     const min = Math.min(fullNumber, secondFullNumber);
 

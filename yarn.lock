@@ -4100,6 +4100,11 @@ jiti@^1.21.0:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.21.3.tgz#b2adb07489d7629b344d59082bbedb8c21c5f755"
   integrity sha512-uy2bNX5zQ+tESe+TiC7ilGRz8AtRGmnJH55NC5S0nSUjvvvM2hJHmefHErugGXN4pNv4Qx7vLsnNw9qJ9mtIsw==
 
+jotai@^2.20.1:
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.20.1.tgz#473274f1b78c60acce1b868be5655b3c706dec8e"
+  integrity sha512-dnuKfU/GLi8B28RRMjQ3AfoN7kfzP8o41+AX2FmITZqEMY8PHnjABq+VkEooomLwYaGjda+pgy0yFSjaHX/ZPg==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
