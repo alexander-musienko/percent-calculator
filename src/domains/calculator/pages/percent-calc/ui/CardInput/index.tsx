@@ -47,7 +47,7 @@ export const CardInput: FC<TCardInputProps> = ({ config, calcFn }) => {
   }, [watch]);
 
   return (
-    <>
+    <div className="flex gap-4 flex-row items-center">
       <div className="flex flex-col gap-2 items-center sm:flex-row sm:gap-4">
         {" "}
         <Input
@@ -71,6 +71,6 @@ export const CardInput: FC<TCardInputProps> = ({ config, calcFn }) => {
           {config?.unit}
         </p>
       </div>
-    </>
+    </div>
   );
 };
