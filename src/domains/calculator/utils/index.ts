@@ -15,7 +15,7 @@ export const calculatePercentOfANumber = (values: TValues, toFixedNum?: number) 
 
 export const calculatePercentPlusNumber = (values: TValues, toFixedNum?: number) => {
   if (values?.a && values?.b) {
-    const [fullNumber, percent] = [+values.a, +values.b];
+    const [fullNumber, percent] = [+values.b, +values.a];
     const onePercentNumber = fullNumber / 100;
     const numberOfPercent = onePercentNumber * percent;
     const percentPlusNumberResult = numberOfPercent + fullNumber;
@@ -33,7 +33,7 @@ export const subtractPercentFromNumber = (values: TValues, toFixedNum?: number) 
     const subtractedNumberResult = fullNumber - numberOfPercent;
     return +subtractedNumberResult.toFixed(toFixedNum || 0);
   } else {
-    return 1;
+    return 0;
   }
 };
 

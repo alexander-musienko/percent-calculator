@@ -35,7 +35,7 @@ const copyOnClick = (e: React.MouseEvent<HTMLParagraphElement>) => {
 };
 
 export const CardInput: FC<TCardInputProps> = ({ config, calcFn }) => {
-  const { register, watch, getValues } = useForm<TFormData>();
+  const { register, watch } = useForm<TFormData>();
   const [result, setResult] = useState(0);
 
   useEffect(() => {

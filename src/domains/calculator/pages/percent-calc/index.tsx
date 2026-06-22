@@ -3,6 +3,7 @@ import { ChangeEvent, useState } from "react";
 import {
   calculateDifferenceInPercentage,
   calculatePercentOfANumber,
+  calculatePercentPlusNumber,
   subtractPercentFromNumber,
 } from "../../utils";
 import { CardLayout } from "./ui/CardInstance";
@@ -30,8 +31,8 @@ const INPUT_CONFIGS: Record<string, TCardInputProps> = {
   percentMinusNumber: {
     config: {
       leftInput: {
-        label: "Процент",
-        placeholder: "Процент %",
+        label: "Процент %",
+        placeholder: "Процент",
       },
       rightInput: {
         label: "Числа",
@@ -45,8 +46,8 @@ const INPUT_CONFIGS: Record<string, TCardInputProps> = {
   percentOfNumber: {
     config: {
       leftInput: {
-        label: "Процент",
-        placeholder: "Процент %",
+        label: "Процент %",
+        placeholder: "Процент",
       },
       rightInput: {
         label: "Числа",
@@ -60,8 +61,8 @@ const INPUT_CONFIGS: Record<string, TCardInputProps> = {
   percentPlusNumber: {
     config: {
       leftInput: {
-        label: "Процент",
-        placeholder: "Процент %",
+        label: "Процент %",
+        placeholder: "Процент",
       },
       rightInput: {
         label: "Числу",
@@ -69,17 +70,17 @@ const INPUT_CONFIGS: Record<string, TCardInputProps> = {
       },
       dividerLabel: "к",
     },
-    calcFn: calculatePercentOfANumber,
+    calcFn: calculatePercentPlusNumber,
   },
 
   percentDelta: {
     config: {
       leftInput: {
-        label: "Число один",
+        label: "Число 1",
         placeholder: "Число",
       },
       rightInput: {
-        label: "Число два",
+        label: "Число 2",
         placeholder: "Число",
       },
       dividerLabel: "с",
@@ -113,26 +114,6 @@ export const PercentCalc = () => {
         <CardLayout headerText="Разница в процентах между числами (Δ%)">
           <CardInput {...INPUT_CONFIGS.percentDelta} />
         </CardLayout>
-
-        {/* <CardLayout
-          headerText="Разница в процентах между числами (Δ%)"
-          result={results.percentOfDifference}
-          unit="%"
-        >
-          <Input
-            type="number"
-            placeholder="Число"
-            label="Число 1"
-            {...register("differenceInPercentage.fullNumber")}
-          />
-          <p>от</p>
-          <Input
-            type="number"
-            placeholder="Число"
-            label="Число 2"
-            {...register("differenceInPercentage.secondFullNumber")}
-          />
-        </CardLayout>  */}
 
         <Select onChange={handleNumberOfDecimalPlaces} label="Знаков после запятой">
           {decimalItems.map((decimalItem) => (
